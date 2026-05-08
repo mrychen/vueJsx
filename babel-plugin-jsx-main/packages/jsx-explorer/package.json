@@ -1,0 +1,23 @@
+{
+  "name": "@vue/jsx-explorer",
+  "type": "module",
+  "version": "2.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.28.5",
+    "@vue/babel-plugin-jsx": "workspace:*",
+    "assert": "^2.1.0",
+    "monaco-editor": "^0.55.1",
+    "vue": "catalog:"
+  },
+  "devDependencies": {
+    "@types/babel__standalone": "^7.1.9",
+    "@vitejs/plugin-vue-jsx": "^5.1.2",
+    "vite": "npm:rolldown-vite@latest"
+  }
+}
