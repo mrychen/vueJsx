@@ -1,5 +1,5 @@
 # @see: http://editorconfig.org
-
+# 统一不同编辑器的编码风格
 root = true
 
 [*] # 表示所有文件适用

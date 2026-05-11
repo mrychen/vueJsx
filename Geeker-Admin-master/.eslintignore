@@ -1,3 +1,5 @@
+
+# 忽略 Eslint 校验
 *.sh
 node_modules
 *.md

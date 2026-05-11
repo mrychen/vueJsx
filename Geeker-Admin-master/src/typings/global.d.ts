@@ -1,4 +1,5 @@
 /* Menu */
+// 明一个全局命名空间
 declare namespace Menu {
   interface MenuOptions {
     path: string;

@@ -1,5 +1,5 @@
 // @see: http://eslint.cn
-
+// Eslint 校验配置文件
 module.exports = {
   root: true,
   env: {

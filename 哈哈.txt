@@ -1,1 +1,1 @@
-asdadadad sdfsfsdfsdf 
+{"constructionUnitCode":"company_XOW6LdNs88","constructionUnitName":"建设管理公司","buildUnitDatas":[{"buildUnitCode":"company_YrdYuexu1y","buildUnitName":"中铁一局集团有限公司"}],"cityAreaCode":"330110","cityAreaName":"余杭区","engineeringTypeCode":"station","engineeringTypeName":"车站","geoJson":"{\"type\":\"Feature\",\"properties\":{\"type\":\"\",\"planTime\":\"\",\"finishTime\":\"\",\"area\":\"\",\"Name\":\"双陈站\",\"Layer\":\"地铁10号线\",\"desc_\":null,\"isTransfer\":false,\"isUnderConstruction\":true},\"geometry\":{\"type\":\"Point\",\"coordinates\":[120.11,30.40]}}"}

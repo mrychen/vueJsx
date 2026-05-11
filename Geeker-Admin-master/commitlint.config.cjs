@@ -1,4 +1,5 @@
 // @see: https://cz-git.qbenben.com/zh/guide
+// git 提交规范配置
 const fs = require("fs");
 const path = require("path");
 
