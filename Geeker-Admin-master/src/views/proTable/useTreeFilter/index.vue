@@ -35,6 +35,10 @@
     </div>
   </div>
 </template>
+<!-- 【Vue解释】：
+  lang="ts" 表示使用 TypeScript 编写 setup 脚本。
+  如果这里不涉及使用 render 函数或者 JSX 返回组件片段，就可以只用 ts。
+-->
 <script setup lang="ts" name="useTreeFilter">
 import { ref, reactive } from "vue";
 import { User } from "@/api/interface";

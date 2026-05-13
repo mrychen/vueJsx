@@ -1,23 +1,10 @@
 <template>
   <div class="main-box">
-    <TreeFilter
-      label="name"
-      title="部门列表(单选)"
-      :data="treeFilterData"
-      :default-value="initParam.departmentId"
-      @change="changeTreeFilter"
-    />
+    <TreeFilter label="name" title="部门列表(单选)" :data="treeFilterData" :default-value="initParam.departmentId"
+      @change="changeTreeFilter" />
     <div class="table-box">
-      <ProTable
-        ref="proTable"
-        row-key="id"
-        :indent="20"
-        :columns="columns"
-        :request-api="getUserTreeList"
-        :request-auto="false"
-        :init-param="initParam"
-        :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }"
-      >
+      <ProTable ref="proTable" row-key="id" :indent="20" :columns="columns" :request-api="getUserTreeList"
+        :request-auto="false" :init-param="initParam" :search-col="{ xs: 1, sm: 1, md: 2, lg: 3, xl: 3 }">
         <!-- 表格 header 按钮 -->
         <template #tableHeader>
           <el-button type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
@@ -35,6 +22,10 @@
   </div>
 </template>
 
+<!-- 【Vue/JSX解释】：
+  这里同样使用了 <script setup lang="tsx">。
+  树形表格通常伴随着左侧的树形筛选组件（TreeFilter），这里展示了如何将左侧树形点击事件与右侧表格联动。
+-->
 <script setup lang="tsx" name="treeProTable">
 import { onMounted, reactive, ref } from "vue";
 import { User } from "@/api/interface";
@@ -116,6 +107,9 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
       el: "select",
       props: { placeholder: "请输入性别查询", filterable: true, remote: true, reserveKeyword: true, loading, remoteMethod }
     },
+    // 【JSX解释】：
+    // 这里使用了极简的 JSX 渲染，由于只需返回字符串，外面包裹了 `<> ... </>` (Fragment)。
+    // JSX 的 `{}` 中支持任何有效的 JS 表达式，比如三元运算符。这比写 slot 更简洁。
     render: scope => <>{scope.row.gender === 1 ? "男" : "女"}</>
   },
   { prop: "idCard", label: "身份证号" },

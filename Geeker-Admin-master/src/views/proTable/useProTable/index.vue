@@ -1,20 +1,15 @@
 <template>
   <div class="table-box">
-    <ProTable
-      ref="proTable"
-      :columns="columns"
-      :request-api="getTableList"
-      :init-param="initParam"
-      :data-callback="dataCallback"
-      @drag-sort="sortTable"
-    >
+    <ProTable ref="proTable" :columns="columns" :request-api="getTableList" :init-param="initParam"
+      :data-callback="dataCallback" @drag-sort="sortTable">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <el-button v-auth="'add'" type="primary" :icon="CirclePlus" @click="openDrawer('新增')">新增用户</el-button>
         <el-button v-auth="'batchAdd'" type="primary" :icon="Upload" plain @click="batchAdd">批量添加用户</el-button>
         <el-button v-auth="'export'" type="primary" :icon="Download" plain @click="downloadFile">导出用户数据</el-button>
         <el-button type="primary" plain @click="toDetail">To 子集详情页面</el-button>
-        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected" @click="batchDelete(scope.selectedListIds)">
+        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected"
+          @click="batchDelete(scope.selectedListIds)">
           批量删除用户
         </el-button>
       </template>
@@ -47,6 +42,11 @@
   </div>
 </template>
 
+<!-- 【Vue/JSX解释】：
+  <script setup> 是 Vue3 组合式 API 的编译时语法糖，内部声明的顶层绑定会自动暴露给模板。
+  lang="tsx" 表示该脚本不仅支持 TypeScript，还支持在其中编写 JSX/TSX 语法，这对于需要动态渲染组件（如表格列配置）非常有用。
+  name="useProTable" 结合 vite-plugin-vue-setup-extend 插件，用于定义组件名称，方便 KeepAlive 缓存或 DevTools 调试。
+-->
 <script setup lang="tsx" name="useProTable">
 import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
@@ -81,9 +81,12 @@ const toDetail = () => {
 };
 
 // ProTable 实例
+// 【Vue解释】：使用 ref 创建一个响应式引用，并使用泛型 <ProTableInstance> 指定类型。
+// 它将绑定到模板中的 ref="proTable" 上，从而可以通过 proTable.value 访问 ProTable 组件暴露的方法和属性。
 const proTable = ref<ProTableInstance>();
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable (之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
+// 【Vue解释】：使用 reactive 创建深层响应式对象，适合存放复杂状态如对象和数组。它在访问时不需要像 ref 一样加 .value。
 const initParam = reactive({ type: 1 });
 
 // dataCallback 是对于返回的表格数据做处理，如果你后台返回的数据不是 list && total 这些字段，可以在这里进行处理成这些字段
@@ -126,6 +129,9 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     prop: "username",
     label: "用户姓名",
     search: { el: "input", tooltip: "我是搜索提示" },
+    // 【JSX解释】：使用 render 函数来定制该列的显示内容，这等价于在 Vue 模板中写 <template #username="scope">...
+    // 渲染函数的好处是可以直接利用 JS 强大的逻辑表达能力。
+    // link 属性相当于 vue template 中的 `<el-button link>`。
     render: scope => {
       return (
         <el-button type="primary" link onClick={() => ElMessage.success("我是通过 tsx 语法渲染的内容")}>
@@ -152,6 +158,10 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     label: "年龄",
     search: {
       // 自定义 search 显示内容
+      // 【JSX解释】：这里的 render 函数用来覆盖默认的搜索输入框，使用解构参数 { searchParam } 获取当前的搜索表单对象。
+      // 注意在 JSX 中：
+      // 1. class 属性通常写成 class="xxx"，但在 React JSX 中是 className。在 Vue JSX 中，直接写 class="xxx" 是完全支持且推荐的。
+      // 2. v-model 指令在 JSX 中写为 vModel 或者使用 model-value 和 onUpdate:modelValue 的组合。如果带有修饰符如 .trim，则写作 vModel_trim={xxx}。
       render: ({ searchParam }) => {
         return (
           <div class="flx-center">
@@ -172,6 +182,9 @@ const columns = reactive<ColumnProps<User.ResUserList>[]>([
     enum: getUserStatus,
     search: { el: "tree-select", props: { filterable: true } },
     fieldNames: { label: "userLabel", value: "userStatus" },
+    // 【JSX解释】：在 JSX 中使用三元运算符 (condition ? trueResult : falseResult) 来替代模板中的 v-if / v-else。
+    // <> ... </> 叫做 Fragment（片段），相当于 Vue 的 <template> 标签，用于包裹多个同级节点而不会在 DOM 中生成实际的父节点元素。
+    // 此外，像 active-text 这种带连字符的属性名在 JSX 中也可以原样书写。
     render: scope => {
       return (
         <>

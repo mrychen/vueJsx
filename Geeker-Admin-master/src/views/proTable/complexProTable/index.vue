@@ -36,6 +36,10 @@
   </div>
 </template>
 
+<!-- 【Vue/JSX解释】：
+  <script setup> 配合 lang="tsx" 可以在 Vue 的单文件组件中自由编写和返回 JSX 代码。
+  复杂表格组件中，经常会遇到嵌套表头、列合并、合计行等复杂场景。
+-->
 <script setup lang="tsx" name="complexProTable">
 import { reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
@@ -51,6 +55,10 @@ import { getUserList, deleteUser, resetUserPassWord, getUserStatus, getUserGende
 const proTable = ref<ProTableInstance>();
 
 // 自定义渲染表头（使用tsx语法）
+// 【JSX解释】：
+// JSX 的核心理念是"一切皆是 JS"。在模板语法中遇到难以表达的动态逻辑时，TSX/JSX 的灵活性非常突出。
+// onClick={...} 中的匿名函数，保证了只有点击时才会触发 ElMessage。
+// {scope.column.label} 就是把列配置中的标题数据动态插值到按钮内容里。
 const headerRender = (scope: HeaderRenderScope<User.ResUserList>) => {
   return (
     <el-button type="primary" onClick={() => ElMessage.success("我是通过 tsx 语法渲染的表头")}>
@@ -175,6 +183,7 @@ const resetPass = async (params: User.ResUserList) => {
 .el-table .warning-row .el-table-fixed-column--left {
   background-color: var(--el-color-warning-light-9);
 }
+
 .el-table .success-row,
 .el-table .success-row .el-table-fixed-column--right,
 .el-table .success-row .el-table-fixed-column--left {

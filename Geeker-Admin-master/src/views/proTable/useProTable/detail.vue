@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts" name="useProTableDetail">
+// 【Vue解释】：使用 vue-router 提供的 useRoute 组合式函数获取当前路由信息（如 params 和 query）。
 import { useRoute } from "vue-router";
 const route = useRoute();
 </script>

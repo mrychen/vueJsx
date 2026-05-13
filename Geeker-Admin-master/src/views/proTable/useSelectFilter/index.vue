@@ -39,6 +39,10 @@
     </div>
   </div>
 </template>
+<!-- 【Vue解释】：
+  这里使用 lang="ts" 表示使用纯 TypeScript，而不使用 JSX 语法。
+  在 Vue 中，如果不涉及动态渲染复杂的结构，单纯的数据绑定和逻辑处理使用 lang="ts" 即可。
+-->
 <script setup lang="ts" name="useSelectFilter">
 import { ref, reactive, onMounted, watch } from "vue";
 import { User } from "@/api/interface";
